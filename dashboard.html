@@ -224,6 +224,36 @@ input{font-family:inherit;}
 .tab-pane{display:none;}
 .tab-pane.active{display:block;}
 
+/* ---- Modal ---- */
+.modal-overlay {position: fixed; inset: 0; background: rgba(10,10,13,0.7); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease;}
+.modal-overlay.open { opacity: 1; pointer-events: auto; }
+.modal-content {position: relative; width: 100%; max-width: 420px; border-radius: var(--radius-lg); padding: 32px; transform: translateY(20px); transition: transform .3s ease; z-index: 101;}
+.modal-content::before {content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);}
+.modal-overlay.open .modal-content { transform: translateY(0); }
+
+/* Custom scrollbar for dropdown */
+.select-dropdown::-webkit-scrollbar { width: 6px; }
+.select-dropdown::-webkit-scrollbar-track { background: transparent; }
+.select-dropdown::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+.select-dropdown::-webkit-scrollbar-thumb:hover { background: var(--slate); }
+.modal-header { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; margin-bottom: 8px; }
+.modal-desc { font-size: 0.86rem; color: var(--slate); margin-bottom: 24px; }
+.form-group { margin-bottom: 20px; }
+.form-label { display: block; font-family: var(--font-mono); font-size: 0.74rem; color: var(--slate); margin-bottom: 8px; text-transform: uppercase; }
+
+/* Custom Multi-Select */
+.custom-select { position: relative; width: 100%; user-select: none; }
+.select-trigger { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: var(--radius-sm); cursor: pointer; font-size: 0.88rem; color: var(--mist); background: rgba(10,10,13,0.35); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); border: 1px solid var(--glass-border); }
+.select-dropdown { position: absolute; top: calc(100% + 6px); left: 0; right: 0; border-radius: var(--radius-sm); padding: 6px; z-index: 10; display: none; flex-direction: column; gap: 2px; max-height: 200px; overflow-y: auto; background: rgba(10,10,13,0.55); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%); border: 1px solid var(--glass-border); box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+.custom-select.open .select-dropdown { display: flex; }
+.select-option { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85rem; color: var(--mist); transition: background .2s; }
+.select-option:hover { background: rgba(248,248,255,0.06); }
+.select-option input[type="checkbox"] { appearance: none; width: 16px; height: 16px; border: 1.5px solid var(--slate); border-radius: 4px; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
+.select-option input[type="checkbox"]:checked { background: var(--flare); border-color: var(--flare); }
+.select-option input[type="checkbox"]:checked::after { content: ''; position: absolute; top: 1px; left: 4px; width: 4px; height: 8px; border: solid var(--dusk); border-width: 0 2px 2px 0; transform: rotate(45deg); }
+
+.modal-actions { display: flex; gap: 12px; margin-top: 32px; justify-content: flex-end; }
+
 @media(max-width:640px){
   .content{padding:24px 18px 60px;}
   .topbar{padding:14px 18px;}
@@ -340,7 +370,7 @@ input{font-family:inherit;}
         <div class="card glass spotlight" data-reveal>
           <div class="card-head">
             <div>
-              <h2>Wave #015</h2>
+              <h2>Wave 2026-06-29</h2>
               <div class="sub">Lifestyle &amp; Creators (Tier 2)</div>
             </div>
             <span class="badge active"><span class="dot"></span>Live now</span>
@@ -361,7 +391,7 @@ input{font-family:inherit;}
           </div>
           
           <div style="margin-top:20px; display:flex; gap:12px;">
-            <button class="btn btn-primary">Join Wave</button>
+            <button class="btn btn-primary" onclick="openModal()">Join Wave</button>
             <button class="btn btn-ghost">View Details</button>
           </div>
         </div>
@@ -369,7 +399,7 @@ input{font-family:inherit;}
         <div class="card glass spotlight" data-reveal>
           <div class="card-head">
             <div>
-              <h2>Wave #016</h2>
+              <h2>Wave 2026-06-30</h2>
               <div class="sub">Tech &amp; Coding (Tier 1)</div>
             </div>
             <span class="badge pending"><span class="dot"></span>Starting soon</span>
@@ -390,7 +420,7 @@ input{font-family:inherit;}
           </div>
           
           <div style="margin-top:20px; display:flex; gap:12px;">
-            <button class="btn btn-primary">Register Now</button>
+            <button class="btn btn-primary" onclick="openModal()">Register Now</button>
           </div>
         </div>
       </div>
@@ -405,21 +435,21 @@ input{font-family:inherit;}
             <thead><tr><th>Wave ID</th><th>Niche</th><th>Platforms</th><th>Gained</th><th>Status</th></tr></thead>
             <tbody>
               <tr>
-                <td><b>#014</b></td>
+                <td><b>2026-06-28</b></td>
                 <td class="muted">General Engagement</td>
                 <td class="muted">IG, TT, X</td>
                 <td style="color:var(--mist); font-weight:600;">+245</td>
                 <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
               </tr>
               <tr>
-                <td><b>#012</b></td>
+                <td><b>2026-06-25</b></td>
                 <td class="muted">Tech &amp; Dev</td>
                 <td class="muted">X</td>
                 <td style="color:var(--mist); font-weight:600;">+112</td>
                 <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
               </tr>
               <tr>
-                <td><b>#009</b></td>
+                <td><b>2026-06-21</b></td>
                 <td class="muted">Creative &amp; Design</td>
                 <td class="muted">IG</td>
                 <td style="color:var(--mist); font-weight:600;">+85</td>
@@ -500,7 +530,7 @@ input{font-family:inherit;}
 
         <div class="card glass" data-reveal>
           <span class="eyebrow">Live wave</span>
-          <div class="wave-title">Wave #014</div>
+          <div class="wave-title">Wave 2026-06-29</div>
           <div class="progress"><div class="progress-fill" data-progress="68"></div></div>
           <div class="progress-label">68% complete</div>
           <div class="wave-meta">
@@ -623,7 +653,94 @@ input{font-family:inherit;}
   </main>
 </div>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="joinWaveModal">
+  <div class="modal-content">
+    <div class="modal-header">Join a Wave</div>
+    <div class="modal-desc">Select your niche and the platforms you want to grow on to find the perfect wave.</div>
+    
+    <div class="form-group">
+      <label class="form-label">Category / Niche</label>
+      <div class="custom-select">
+        <div class="select-trigger">
+          <span class="select-value">Select categories...</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="select-dropdown">
+          <label class="select-option"><input type="checkbox" value="Tech &amp; Coding"> Tech &amp; Coding</label>
+          <label class="select-option"><input type="checkbox" value="Lifestyle &amp; Creators"> Lifestyle &amp; Creators</label>
+          <label class="select-option"><input type="checkbox" value="Finance &amp; Business"> Finance &amp; Business</label>
+          <label class="select-option"><input type="checkbox" value="Art &amp; Design"> Art &amp; Design</label>
+          <label class="select-option"><input type="checkbox" value="General Engagement"> General Engagement</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Platforms</label>
+      <div class="custom-select">
+        <div class="select-trigger">
+          <span class="select-value">Select platforms...</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="select-dropdown">
+          <label class="select-option"><input type="checkbox" value="Instagram"> Instagram</label>
+          <label class="select-option"><input type="checkbox" value="TikTok"> TikTok</label>
+          <label class="select-option"><input type="checkbox" value="X (Twitter)"> X (Twitter)</label>
+          <label class="select-option"><input type="checkbox" value="YouTube"> YouTube</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeModal()">Confirm Join</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// ============ MODAL & CUSTOM SELECT ============
+function openModal() { document.getElementById('joinWaveModal').classList.add('open'); }
+function closeModal() { document.getElementById('joinWaveModal').classList.remove('open'); }
+document.getElementById('joinWaveModal').addEventListener('click', (e) => { 
+  if(e.target === document.getElementById('joinWaveModal')) closeModal(); 
+});
+
+document.querySelectorAll('.custom-select').forEach(sel => {
+  const trigger = sel.querySelector('.select-trigger');
+  const valueDisplay = sel.querySelector('.select-value');
+  const checkboxes = sel.querySelectorAll('input[type="checkbox"]');
+  const defaultText = valueDisplay.textContent;
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelectorAll('.custom-select').forEach(s => {
+      if(s !== sel) s.classList.remove('open');
+    });
+    sel.classList.toggle('open');
+  });
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      const selected = Array.from(checkboxes).filter(c => c.checked).map(c => c.value);
+      if(selected.length === 0) {
+        valueDisplay.textContent = defaultText;
+      } else if(selected.length <= 2) {
+        valueDisplay.textContent = selected.join(', ');
+      } else {
+        valueDisplay.textContent = selected.length + ' selected';
+      }
+    });
+  });
+});
+
+document.addEventListener('click', (e) => {
+  if(!e.target.closest('.custom-select')) {
+    document.querySelectorAll('.custom-select').forEach(s => s.classList.remove('open'));
+  }
+});
+
 // ============ SCROLL REVEAL ============
 (function(){
   const els = document.querySelectorAll('[data-reveal]');

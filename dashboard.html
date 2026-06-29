@@ -124,8 +124,8 @@ input{font-family:inherit;}
 .eyebrow::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--current);box-shadow:0 0 8px var(--current);flex-shrink:0;}
 
 /* ---- Stat cards ---- */
-.stat-grid{grid-template-columns:repeat(4,1fr);}
-@media(max-width:1180px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+.stat-grid{grid-template-columns:repeat(3,1fr);}
+@media(max-width:980px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:560px){.stat-grid{grid-template-columns:1fr;}}
 .stat-card{padding:22px 22px 18px;border-radius:var(--radius-lg);}
 .stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;}
@@ -297,17 +297,9 @@ input{font-family:inherit;}
   <main class="main">
     <div class="topbar">
       <h1>Overview</h1>
-      <div class="search glass">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="M19 19l-4.5-4.5"/></svg>
-        <input type="text" placeholder="Search waves, barters, creators…" aria-label="Search">
-      </div>
       <button class="icon-btn spotlight" aria-label="Notifications">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0112 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9z"/><path d="M10 19a2 2 0 004 0"/></svg>
         <span class="bell-dot"></span>
-      </button>
-      <button class="btn btn-primary spotlight">
-        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-        New wave
       </button>
     </div>
 
@@ -315,15 +307,6 @@ input{font-family:inherit;}
 
       <!-- STAT CARDS -->
       <div class="section-row stat-grid">
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">Profile reach</div><div class="value" data-count="18240">0</div></div>
-            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>12.4%</div>
-          </div>
-          <svg class="spark" viewBox="0 0 100 28" width="100%" height="28"><path class="spark-path" stroke="var(--flare)" d="M2,22 C14,20 20,14 30,15 C42,16 48,6 60,8 C72,10 80,4 98,3"/></svg>
-          <div class="stat-sub">vs previous 30 days</div>
-        </div>
-
         <div class="stat-card glass spotlight" data-reveal>
           <div class="stat-top">
             <div><div class="label">Active waves</div><div class="value" data-count="3">0</div></div>
@@ -396,15 +379,11 @@ input{font-family:inherit;}
             <div>Started: <b>2h ago</b></div>
             <div>Ends in: <b>1h 40m</b></div>
           </div>
-          <div class="tag-row">
+          <div class="tag-row" style="margin-bottom: 0;">
             <span class="tag">Instagram</span>
             <span class="tag">TikTok</span>
             <span class="tag">X</span>
           </div>
-          <button class="btn btn-ghost btn-sm spotlight">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" stroke="none"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
-            Pause wave
-          </button>
         </div>
       </div>
 
@@ -478,26 +457,8 @@ input{font-family:inherit;}
         </div>
       </div>
 
-      <!-- SEO + GUARDRAILS -->
-      <div class="section-row row-1-1">
-        <div class="card glass" data-reveal>
-          <div class="card-head">
-            <div>
-              <h2>Search visibility</h2>
-              <div class="sub">Synced via Semrush</div>
-            </div>
-          </div>
-          <div class="vis-score">
-            <div class="big" data-count="64">0</div>
-            <div class="of">/ 100 · <span class="trend" style="display:inline">▲ 3 this week</span></div>
-          </div>
-          <div class="kw-row"><span class="kw-pos">#4</span><span class="kw-name">upflap alternative</span><span class="trend">▲2</span></div>
-          <div class="kw-row"><span class="kw-pos">#9</span><span class="kw-name">creator growth network</span><span class="trend">▲5</span></div>
-          <div class="kw-row"><span class="kw-pos">#12</span><span class="kw-name">follow for follow app</span><span class="trend down">▼1</span></div>
-          <div class="kw-row"><span class="kw-pos">#7</span><span class="kw-name">barter engagement tool</span><span class="trend">▲1</span></div>
-          <div class="kw-row"><span class="kw-pos">#15</span><span class="kw-name">organic referral platform</span><span class="muted" style="font-family:var(--font-mono);font-size:0.74rem;">new</span></div>
-        </div>
-
+      <!-- GUARDRAILS -->
+      <div class="section-row">
         <div class="card glass" data-reveal>
           <div class="card-head"><h2>Guardrails &amp; safety</h2></div>
 

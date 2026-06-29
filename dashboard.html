@@ -330,7 +330,7 @@ input{font-family:inherit;}
   <main class="main">
     <div class="topbar">
       <h1 id="topbar-title">Waves</h1>
-      <button class="icon-btn spotlight" aria-label="Notifications">
+      <button class="icon-btn spotlight" id="notifications-btn" aria-label="Notifications">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0112 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9z"/><path d="M10 19a2 2 0 004 0"/></svg>
         <span class="bell-dot"></span>
       </button>
@@ -728,6 +728,54 @@ input{font-family:inherit;}
         </div>
       </div>
     </div>
+
+    <!-- NOTIFICATIONS PANE -->
+    <div class="content tab-pane" id="notifications-pane">
+      <div class="section-row">
+        <div class="card glass" data-reveal>
+          <div class="card-head">
+            <h2>Recent Notifications</h2>
+          </div>
+          
+          <div class="guard-row">
+            <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h11l-3-3"/><path d="M17 17H6l3 3"/></svg></div>
+            <div class="guard-text">
+              <div class="t">Barter Request Accepted</div>
+              <div class="d">@kwame.codes accepted your Follow ↔ Follow request on X.</div>
+            </div>
+            <span class="muted" style="font-size:0.78rem;">2m ago</span>
+          </div>
+
+          <div class="guard-row">
+            <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12c2 0 2-6 5-6s3 6 5 6 2-6 5-6 3 6 5 6"/></svg></div>
+            <div class="guard-text">
+              <div class="t">Wave Starting Soon</div>
+              <div class="d">Wave 2026-06-30 (Tech &amp; Coding) starts in 3 hours. Get ready!</div>
+            </div>
+            <span class="muted" style="font-size:0.78rem;">1h ago</span>
+          </div>
+
+          <div class="guard-row">
+            <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4L5.6 5.6"/></svg></div>
+            <div class="guard-text">
+              <div class="t">System Update</div>
+              <div class="d">Jitter delay parameters have been optimized for Instagram's latest API changes.</div>
+            </div>
+            <span class="muted" style="font-size:0.78rem;">5h ago</span>
+          </div>
+
+          <div class="guard-row" style="border-bottom:none;">
+            <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3 7.5-7 9-4-1.5-7-4-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+            <div class="guard-text">
+              <div class="t">Weekly Report Available</div>
+              <div class="d">Your engagement grew by 18% this week. Check your analytics dashboard.</div>
+            </div>
+            <span class="muted" style="font-size:0.78rem;">1d ago</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -984,33 +1032,44 @@ document.addEventListener('click', (e) => {
   const navItems = document.querySelectorAll('[data-nav]');
   const panes = document.querySelectorAll('.tab-pane');
   const topbarTitle = document.getElementById('topbar-title');
+  const notifBtn = document.getElementById('notifications-btn');
+
+  function openPane(targetId, title, activeNavItem) {
+    navItems.forEach(i => i.classList.remove('active'));
+    if(activeNavItem) activeNavItem.classList.add('active');
+    if(topbarTitle) topbarTitle.textContent = title;
+
+    if(targetId) {
+      panes.forEach(p => {
+        if(p.id === targetId + '-pane') {
+          p.classList.add('active');
+          setTimeout(() => {
+             const bars = p.querySelectorAll('.progress-fill');
+             bars.forEach(b => {
+               b.style.width = b.dataset.progress + '%';
+             });
+          }, 50);
+        } else {
+          p.classList.remove('active');
+        }
+      });
+    }
+  }
 
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      const targetId = item.dataset.nav;
-      
-      navItems.forEach(i => i.classList.remove('active'));
-      item.classList.add('active');
-      if(topbarTitle) topbarTitle.textContent = item.querySelector('span').textContent;
-
-      if(targetId) {
-        panes.forEach(p => {
-          if(p.id === targetId + '-pane') {
-            p.classList.add('active');
-            setTimeout(() => {
-               const bars = p.querySelectorAll('.progress-fill');
-               bars.forEach(b => {
-                 b.style.width = b.dataset.progress + '%';
-               });
-            }, 50);
-          } else {
-            p.classList.remove('active');
-          }
-        });
-      }
+      openPane(item.dataset.nav, item.querySelector('span').textContent, item);
     });
   });
+
+  if(notifBtn) {
+    notifBtn.addEventListener('click', () => {
+      openPane('notifications', 'Notifications', null);
+      const dot = notifBtn.querySelector('.bell-dot');
+      if(dot) dot.style.display = 'none';
+    });
+  }
 })();
 
 // ============ JITTER LOG FEED ============

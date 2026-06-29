@@ -221,6 +221,9 @@ input{font-family:inherit;}
 .log-line.show{opacity:1;transform:translateY(0);}
 .log-line .t{color:var(--current);}
 
+.tab-pane{display:none;}
+.tab-pane.active{display:block;}
+
 @media(max-width:640px){
   .content{padding:24px 18px 60px;}
   .topbar{padding:14px 18px;}
@@ -241,11 +244,11 @@ input{font-family:inherit;}
 
     <div class="nav-group">
       <span class="nav-label">Workspace</span>
-      <a class="nav-item active" data-nav>
+      <a class="nav-item" data-nav="overview">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
         <span>Overview</span>
       </a>
-      <a class="nav-item" data-nav>
+      <a class="nav-item active" data-nav="waves">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12c2 0 2-6 5-6s3 6 5 6 2-6 5-6 3 6 5 6"/></svg>
         <span>Waves</span>
       </a>
@@ -296,14 +299,140 @@ input{font-family:inherit;}
   <!-- MAIN -->
   <main class="main">
     <div class="topbar">
-      <h1>Overview</h1>
+      <h1 id="topbar-title">Waves</h1>
       <button class="icon-btn spotlight" aria-label="Notifications">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0112 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9z"/><path d="M10 19a2 2 0 004 0"/></svg>
         <span class="bell-dot"></span>
       </button>
     </div>
 
-    <div class="content">
+    <!-- WAVES PANE -->
+    <div class="content tab-pane active" id="waves-pane">
+      
+      <!-- WAVES STAT CARDS -->
+      <div class="section-row stat-grid">
+        <div class="stat-card glass spotlight" data-reveal>
+          <div class="stat-top">
+            <div><div class="label">Waves Completed</div><div class="value" data-count="12">0</div></div>
+            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+3</div>
+          </div>
+          <div class="stat-sub">in the last 30 days</div>
+        </div>
+
+        <div class="stat-card glass spotlight" data-reveal>
+          <div class="stat-top">
+            <div><div class="label">Followers Gained</div><div class="value" data-count="842">0</div></div>
+            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+18%</div>
+          </div>
+          <div class="stat-sub">via Follow-for-Follow</div>
+        </div>
+
+        <div class="stat-card glass spotlight" data-reveal>
+          <div class="stat-top">
+            <div><div class="label">Upcoming Waves</div><div class="value" data-count="5">0</div></div>
+          </div>
+          <div class="stat-sub">matching your niche</div>
+        </div>
+      </div>
+
+      <!-- ACTIVE WAVES -->
+      <div class="section-row row-1-1">
+        <div class="card glass spotlight" data-reveal>
+          <div class="card-head">
+            <div>
+              <h2>Wave #015</h2>
+              <div class="sub">Lifestyle &amp; Creators (Tier 2)</div>
+            </div>
+            <span class="badge active"><span class="dot"></span>Live now</span>
+          </div>
+          
+          <div class="wave-meta">
+            <div>Current Participants: <b>450 nodes</b></div>
+            <div>Estimated Gain: <b>+120 to +150 followers</b></div>
+            <div>Time left to join: <b>25m 14s</b></div>
+          </div>
+          
+          <div class="progress"><div class="progress-fill" style="width:0%" data-progress="40"></div></div>
+          <div class="progress-label">Capacity: 40% full</div>
+          
+          <div class="tag-row">
+            <span class="tag">Instagram</span>
+            <span class="tag">TikTok</span>
+          </div>
+          
+          <div style="margin-top:20px; display:flex; gap:12px;">
+            <button class="btn btn-primary">Join Wave</button>
+            <button class="btn btn-ghost">View Details</button>
+          </div>
+        </div>
+
+        <div class="card glass spotlight" data-reveal>
+          <div class="card-head">
+            <div>
+              <h2>Wave #016</h2>
+              <div class="sub">Tech &amp; Coding (Tier 1)</div>
+            </div>
+            <span class="badge pending"><span class="dot"></span>Starting soon</span>
+          </div>
+          
+          <div class="wave-meta">
+            <div>Registered: <b>85 nodes</b></div>
+            <div>Estimated Gain: <b>+50 to +80 followers</b></div>
+            <div>Starts in: <b>3h 10m</b></div>
+          </div>
+          
+          <div class="progress"><div class="progress-fill" style="width:0%" data-progress="15"></div></div>
+          <div class="progress-label">Capacity: 15% full</div>
+          
+          <div class="tag-row">
+            <span class="tag">X</span>
+            <span class="tag">YouTube</span>
+          </div>
+          
+          <div style="margin-top:20px; display:flex; gap:12px;">
+            <button class="btn btn-primary">Register Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECENT WAVES TABLE -->
+      <div class="section-row">
+        <div class="card glass" data-reveal>
+          <div class="card-head">
+            <h2>Recent Waves</h2>
+          </div>
+          <table class="table">
+            <thead><tr><th>Wave ID</th><th>Niche</th><th>Platforms</th><th>Gained</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><b>#014</b></td>
+                <td class="muted">General Engagement</td>
+                <td class="muted">IG, TT, X</td>
+                <td style="color:var(--mist); font-weight:600;">+245</td>
+                <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
+              </tr>
+              <tr>
+                <td><b>#012</b></td>
+                <td class="muted">Tech &amp; Dev</td>
+                <td class="muted">X</td>
+                <td style="color:var(--mist); font-weight:600;">+112</td>
+                <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
+              </tr>
+              <tr>
+                <td><b>#009</b></td>
+                <td class="muted">Creative &amp; Design</td>
+                <td class="muted">IG</td>
+                <td style="color:var(--mist); font-weight:600;">+85</td>
+                <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW PANE -->
+    <div class="content tab-pane" id="overview-pane">
 
       <!-- STAT CARDS -->
       <div class="section-row stat-grid">
@@ -558,11 +687,34 @@ input{font-family:inherit;}
 
 // ============ NAV ACTIVE STATE ============
 (function(){
-  document.querySelectorAll('[data-nav]').forEach(item => {
+  const navItems = document.querySelectorAll('[data-nav]');
+  const panes = document.querySelectorAll('.tab-pane');
+  const topbarTitle = document.getElementById('topbar-title');
+
+  navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      document.querySelectorAll('[data-nav]').forEach(i => i.classList.remove('active'));
+      const targetId = item.dataset.nav;
+      
+      navItems.forEach(i => i.classList.remove('active'));
       item.classList.add('active');
+      if(topbarTitle) topbarTitle.textContent = item.querySelector('span').textContent;
+
+      if(targetId) {
+        panes.forEach(p => {
+          if(p.id === targetId + '-pane') {
+            p.classList.add('active');
+            setTimeout(() => {
+               const bars = p.querySelectorAll('.progress-fill');
+               bars.forEach(b => {
+                 b.style.width = b.dataset.progress + '%';
+               });
+            }, 50);
+          } else {
+            p.classList.remove('active');
+          }
+        });
+      }
     });
   });
 })();

@@ -392,7 +392,7 @@ input{font-family:inherit;}
           
           <div style="margin-top:20px; display:flex; gap:12px;">
             <button class="btn btn-primary" onclick="openModal()">Join Wave</button>
-            <button class="btn btn-ghost">View Details</button>
+            <button class="btn btn-ghost" onclick="openDetailsModal()">View Details</button>
           </div>
         </div>
 
@@ -699,12 +699,57 @@ input{font-family:inherit;}
   </div>
 </div>
 
+<!-- View Details Modal -->
+<div class="modal-overlay" id="viewDetailsModal">
+  <div class="modal-content">
+    <div class="modal-header">Wave 2026-06-29</div>
+    <div class="modal-desc">Lifestyle &amp; Creators (Tier 2)</div>
+    
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+      <div style="background:rgba(248,248,255,0.03); border:1px solid var(--glass-border); padding:16px; border-radius:var(--radius-sm);">
+        <div style="font-size:0.74rem; color:var(--slate); font-family:var(--font-mono); text-transform:uppercase; margin-bottom:8px;">Participants</div>
+        <div style="font-size:1.4rem; font-weight:600; font-family:var(--font-mono); color:var(--mist);">450 <span style="font-size:0.8rem; color:var(--slate); font-weight:400;">/ 1125</span></div>
+      </div>
+      <div style="background:rgba(248,248,255,0.03); border:1px solid var(--glass-border); padding:16px; border-radius:var(--radius-sm);">
+        <div style="font-size:0.74rem; color:var(--slate); font-family:var(--font-mono); text-transform:uppercase; margin-bottom:8px;">Time Left</div>
+        <div style="font-size:1.4rem; font-weight:600; font-family:var(--font-mono); color:var(--current);">18h 45m</div>
+      </div>
+    </div>
+    
+    <div class="form-group">
+      <label class="form-label">Expected Growth</label>
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; color:var(--mist); margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(248,248,255,0.06);">
+        <span>Followers Gained (Est.)</span>
+        <span style="font-family:var(--font-mono); color:var(--flare);">+120 to +150</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; color:var(--mist); margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(248,248,255,0.06);">
+        <span>Engagement Rate Boost</span>
+        <span style="font-family:var(--font-mono); color:var(--flare);">+12%</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.88rem; color:var(--mist); padding-bottom:8px;">
+        <span>Supported Platforms</span>
+        <span style="font-family:var(--font-mono); color:var(--slate);">IG, TikTok</span>
+      </div>
+    </div>
+    
+    <div class="modal-actions">
+      <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="closeDetailsModal(); openModal();">Join this Wave</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============ MODAL & CUSTOM SELECT ============
 function openModal() { document.getElementById('joinWaveModal').classList.add('open'); }
 function closeModal() { document.getElementById('joinWaveModal').classList.remove('open'); }
 document.getElementById('joinWaveModal').addEventListener('click', (e) => { 
   if(e.target === document.getElementById('joinWaveModal')) closeModal(); 
+});
+
+function openDetailsModal() { document.getElementById('viewDetailsModal').classList.add('open'); }
+function closeDetailsModal() { document.getElementById('viewDetailsModal').classList.remove('open'); }
+document.getElementById('viewDetailsModal').addEventListener('click', (e) => { 
+  if(e.target === document.getElementById('viewDetailsModal')) closeDetailsModal(); 
 });
 
 document.querySelectorAll('.custom-select').forEach(sel => {

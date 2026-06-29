@@ -282,7 +282,7 @@ input{font-family:inherit;}
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 12c2 0 2-6 5-6s3 6 5 6 2-6 5-6 3 6 5 6"/></svg>
         <span>Waves</span>
       </a>
-      <a class="nav-item" data-nav>
+      <a class="nav-item" data-nav="barters">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h11l-3-3"/><path d="M17 17H6l3 3"/></svg>
         <span>Barters</span>
       </a>
@@ -359,9 +359,9 @@ input{font-family:inherit;}
 
         <div class="stat-card glass spotlight" data-reveal>
           <div class="stat-top">
-            <div><div class="label">Upcoming Waves</div><div class="value" data-count="5">0</div></div>
+            <div><div class="label">Total Waves Joined</div><div class="value" data-count="14">0</div></div>
           </div>
-          <div class="stat-sub">matching your niche</div>
+          <div class="stat-sub">since joining Upflap</div>
         </div>
       </div>
 
@@ -551,7 +551,7 @@ input{font-family:inherit;}
         <div class="card glass" data-reveal>
           <div class="card-head">
             <h2>Active barters</h2>
-            <a class="link" href="#">View all</a>
+            <a class="link" href="#" onclick="document.querySelector('[data-nav=\'barters\']').click(); return false;">View all</a>
           </div>
           <table class="table">
             <thead><tr><th>Creator</th><th>Platform</th><th>Exchange</th><th>Status</th><th>Started</th></tr></thead>
@@ -650,6 +650,84 @@ input{font-family:inherit;}
       </div>
 
     </div>
+
+    <!-- BARTERS PANE -->
+    <div class="content tab-pane" id="barters-pane">
+      
+      <!-- BARTERS STAT CARDS -->
+      <div class="section-row stat-grid">
+        <div class="stat-card glass spotlight" data-reveal>
+          <div class="stat-top">
+            <div><div class="label">Active Barters</div><div class="value" data-count="47">0</div></div>
+            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+8</div>
+          </div>
+          <div class="stat-sub">currently ongoing</div>
+        </div>
+
+        <div class="stat-card glass spotlight" data-reveal>
+          <div class="stat-top">
+            <div><div class="label">Completed Barters</div><div class="value" data-count="128">0</div></div>
+            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+12%</div>
+          </div>
+          <div class="stat-sub">this month</div>
+        </div>
+
+        <div class="stat-card glass spotlight" data-reveal>
+          <div class="stat-top">
+            <div><div class="label">Engagement Earned</div><div class="value" data-count="4500" data-suffix="+">0</div></div>
+          </div>
+          <div class="stat-sub">across all platforms</div>
+        </div>
+      </div>
+
+      <!-- BARTERS TABLE -->
+      <div class="section-row">
+        <div class="card glass" data-reveal>
+          <div class="card-head">
+            <div>
+              <h2>Barter Requests &amp; Activity</h2>
+              <div class="sub">Manage your reciprocal engagements across platforms</div>
+            </div>
+            <button class="btn btn-primary" onclick="openBarterModal()">New Barter</button>
+          </div>
+          <table class="table">
+            <thead><tr><th>Creator</th><th>Platform</th><th>Exchange</th><th>Status</th><th>Started</th><th>Action</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><div class="row-creator"><div class="mini-avatar">LS</div>@lumen.studio</div></td>
+                <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
+                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">12m ago</td>
+                <td><button class="btn btn-ghost btn-sm">Message</button></td>
+              </tr>
+              <tr>
+                <td><div class="row-creator"><div class="mini-avatar">NM</div>@northwind.media</div></td>
+                <td class="muted">TikTok</td><td class="muted">Engagement swap</td>
+                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">38m ago</td>
+                <td><button class="btn btn-ghost btn-sm">Message</button></td>
+              </tr>
+              <tr>
+                <td><div class="row-creator"><div class="mini-avatar">KC</div>@kwame.codes</div></td>
+                <td class="muted">X</td><td class="muted">Follow ↔ Follow</td>
+                <td><span class="badge pending"><span class="dot"></span>Pending</span></td><td class="muted">1h ago</td>
+                <td><button class="btn btn-primary btn-sm">Accept</button></td>
+              </tr>
+              <tr>
+                <td><div class="row-creator"><div class="mini-avatar">MC</div>@marigold.co</div></td>
+                <td class="muted">YouTube</td><td class="muted">Comment swap</td>
+                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">2h ago</td>
+                <td><button class="btn btn-ghost btn-sm">Message</button></td>
+              </tr>
+              <tr>
+                <td><div class="row-creator"><div class="mini-avatar">DC</div>@driftandco</div></td>
+                <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
+                <td><span class="badge completed"><span class="dot"></span>Completed</span></td><td class="muted">5h ago</td>
+                <td><button class="btn btn-ghost btn-sm">Review</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </main>
 </div>
 
@@ -738,6 +816,51 @@ input{font-family:inherit;}
   </div>
 </div>
 
+<!-- New Barter Modal -->
+<div class="modal-overlay" id="newBarterModal">
+  <div class="modal-content">
+    <div class="modal-header">Create Barter Request</div>
+    <div class="modal-desc">Propose an exchange of engagement with another creator.</div>
+    
+    <div class="form-group">
+      <label class="form-label">Exchange Type</label>
+      <div class="custom-select">
+        <div class="select-trigger">
+          <span class="select-value">Select exchange...</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="select-dropdown">
+          <label class="select-option"><input type="checkbox" value="Follow for Follow"> Follow ↔ Follow</label>
+          <label class="select-option"><input type="checkbox" value="Engagement Swap"> Engagement Swap</label>
+          <label class="select-option"><input type="checkbox" value="Comment Swap"> Comment Swap</label>
+          <label class="select-option"><input type="checkbox" value="Shoutout"> Shoutout</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Platform</label>
+      <div class="custom-select">
+        <div class="select-trigger">
+          <span class="select-value">Select platform...</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="select-dropdown">
+          <label class="select-option"><input type="checkbox" value="Instagram"> Instagram</label>
+          <label class="select-option"><input type="checkbox" value="TikTok"> TikTok</label>
+          <label class="select-option"><input type="checkbox" value="X (Twitter)"> X (Twitter)</label>
+          <label class="select-option"><input type="checkbox" value="YouTube"> YouTube</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeBarterModal()">Cancel</button>
+      <button class="btn btn-primary" onclick="closeBarterModal()">Send Request</button>
+    </div>
+  </div>
+</div>
+
 <script>
 // ============ MODAL & CUSTOM SELECT ============
 function openModal() { document.getElementById('joinWaveModal').classList.add('open'); }
@@ -751,6 +874,15 @@ function closeDetailsModal() { document.getElementById('viewDetailsModal').class
 document.getElementById('viewDetailsModal').addEventListener('click', (e) => { 
   if(e.target === document.getElementById('viewDetailsModal')) closeDetailsModal(); 
 });
+
+function openBarterModal() { document.getElementById('newBarterModal').classList.add('open'); }
+function closeBarterModal() { document.getElementById('newBarterModal').classList.remove('open'); }
+const newBarterModal = document.getElementById('newBarterModal');
+if(newBarterModal) {
+  newBarterModal.addEventListener('click', (e) => { 
+    if(e.target === newBarterModal) closeBarterModal(); 
+  });
+}
 
 document.querySelectorAll('.custom-select').forEach(sel => {
   const trigger = sel.querySelector('.select-trigger');

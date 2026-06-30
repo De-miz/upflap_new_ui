@@ -209,12 +209,59 @@ input{font-family:inherit;}
 .profile-card .avatar{width:34px;height:34px;border-radius:50%;background:rgba(248,248,255,0.1);display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:0.74rem;flex-shrink:0;}
 .profile-card .name{font-size:0.84rem;font-weight:600;}
 .profile-card .role{font-size:0.72rem;color:var(--slate);}
+.mobile-menu-btn{display:none;}
+.sidebar-backdrop{display:none;}
+
 @media(max-width:980px){
   .sidebar{width:80px;padding:22px 12px;}
   .brand-mark, .nav-label, .nav-item span, .profile-card .name, .profile-card .role{display:none;}
   .nav-item{justify-content:center;}
   .profile-card{justify-content:center;}
   .brand{justify-content:center;padding-bottom:24px;}
+}
+
+@media(max-width:768px){
+  .mobile-menu-btn{display:inline-flex !important;}
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -248px;
+    height: 100vh;
+    z-index: 100;
+    background: var(--dusk-2);
+    width: 248px !important;
+    padding: 26px 18px !important;
+    transition: left 0.3s ease;
+    display: flex !important;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,13,0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 99;
+  }
+  .sidebar-backdrop.open {
+    display: block;
+  }
+  .brand-mark, .nav-label, .nav-item span, .profile-card .name, .profile-card .role {
+    display: block !important;
+  }
+  .nav-item {
+    justify-content: flex-start !important;
+  }
+  .profile-card {
+    justify-content: flex-start !important;
+  }
+  .brand {
+    justify-content: flex-start !important;
+    padding-bottom: 28px !important;
+  }
 }
 
 /* ---- Topbar ---- */
@@ -224,7 +271,7 @@ input{font-family:inherit;}
 .search input{background:none;border:none;color:var(--mist);outline:none;width:100%;font-size:0.84rem;}
 .search input::placeholder{color:var(--slate);}
 .bell-dot{position:absolute;top:8px;right:9px;width:7px;height:7px;border-radius:50%;background:var(--flare);box-shadow:0 0 6px var(--flare);}
-@media(max-width:760px){.search{display:none;}}
+@media(max-width:768px){.search{display:none;}}
 
 /* ---- Main / content ---- */
 .main{flex:1;min-width:0;}
@@ -283,6 +330,14 @@ input{font-family:inherit;}
 .tag{font-family:var(--font-mono);font-size:0.7rem;padding:5px 11px;border-radius:100px;background:rgba(248,248,255,0.06);border:1px solid var(--glass-border);color:var(--current);}
 
 /* ---- Table ---- */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.table-wrap table {
+  min-width: 500px;
+}
 .table th{font-family:var(--font-mono);font-size:0.66rem;letter-spacing:0.08em;color:var(--slate);text-transform:uppercase;text-align:left;padding:0 12px 12px;border-bottom:1px solid var(--glass-border);}
 .table td{padding:13px 12px;border-bottom:1px solid rgba(248,248,255,0.06);font-size:0.86rem;}
 .table tr:last-child td{border-bottom:none;}
@@ -329,7 +384,12 @@ input{font-family:inherit;}
 /* ---- Modal ---- */
 .modal-overlay {position: fixed; inset: 0; background: rgba(10,10,13,0.7); z-index: 100; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .3s ease;}
 .modal-overlay.open { opacity: 1; pointer-events: auto; }
-.modal-content {position: relative; width: 100%; max-width: 420px; border-radius: var(--radius-lg); padding: 32px; transform: translateY(20px); transition: transform .3s ease; z-index: 101;}
+.modal-content {position: relative; width: calc(100% - 32px); max-width: 420px; margin: 16px; border-radius: var(--radius-lg); padding: 32px; transform: translateY(20px); transition: transform .3s ease; z-index: 101;}
+@media(max-width: 480px) {
+  .modal-content {
+    padding: 24px 20px;
+  }
+}
 .modal-content::before {content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--glass-bg); border: 1px solid var(--glass-border); backdrop-filter: blur(16px) saturate(140%); -webkit-backdrop-filter: blur(16px) saturate(140%);}
 .modal-overlay.open .modal-content { transform: translateY(0); }
 
@@ -379,6 +439,18 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
 .conn-option { display: flex; align-items: center; justify-content: space-between; font-size: 0.86rem; color: var(--mist); margin-bottom: 12px; }
 .conn-option:last-child { margin-bottom: 0; }
 .conn-option .opt-text { color: var(--slate); font-size: 0.78rem; margin-top: 2px; }
+
+@media(max-width: 480px) {
+  .profile-edit-avatar-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px !important;
+  }
+  .profile-edit-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
 
 </style>
 </head>
@@ -443,6 +515,13 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
   <!-- MAIN -->
   <main class="main">
     <div class="topbar">
+      <button class="icon-btn spotlight mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu" style="margin-right: 8px;">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </button>
       <h1 id="topbar-title">Waves</h1>
       <button class="icon-btn spotlight" id="theme-toggle-btn" aria-label="Toggle Theme" style="margin-right: 8px;">
         <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -559,32 +638,34 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
           <div class="card-head">
             <h2>Recent Waves</h2>
           </div>
-          <table class="table">
-            <thead><tr><th>Wave ID</th><th>Niche</th><th>Platforms</th><th>Gained</th><th>Status</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><b>2026-06-28</b></td>
-                <td class="muted">General Engagement</td>
-                <td class="muted">IG, TT, X</td>
-                <td style="color:var(--mist); font-weight:600;">+245</td>
-                <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
-              </tr>
-              <tr>
-                <td><b>2026-06-25</b></td>
-                <td class="muted">Tech &amp; Dev</td>
-                <td class="muted">X</td>
-                <td style="color:var(--mist); font-weight:600;">+112</td>
-                <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
-              </tr>
-              <tr>
-                <td><b>2026-06-21</b></td>
-                <td class="muted">Creative &amp; Design</td>
-                <td class="muted">IG</td>
-                <td style="color:var(--mist); font-weight:600;">+85</td>
-                <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Wave ID</th><th>Niche</th><th>Platforms</th><th>Gained</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><b>2026-06-28</b></td>
+                  <td class="muted">General Engagement</td>
+                  <td class="muted">IG, TT, X</td>
+                  <td style="color:var(--mist); font-weight:600;">+245</td>
+                  <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
+                </tr>
+                <tr>
+                  <td><b>2026-06-25</b></td>
+                  <td class="muted">Tech &amp; Dev</td>
+                  <td class="muted">X</td>
+                  <td style="color:var(--mist); font-weight:600;">+112</td>
+                  <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
+                </tr>
+                <tr>
+                  <td><b>2026-06-21</b></td>
+                  <td class="muted">Creative &amp; Design</td>
+                  <td class="muted">IG</td>
+                  <td style="color:var(--mist); font-weight:600;">+85</td>
+                  <td><span class="badge completed"><span class="dot"></span>Completed</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div class="card glass" data-reveal>
@@ -711,36 +792,38 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
             <h2>Active barters</h2>
             <a class="link" href="#" onclick="document.querySelector('[data-nav=\'barters\']').click(); return false;">View all</a>
           </div>
-          <table class="table">
-            <thead><tr><th>Creator</th><th>Platform</th><th>Exchange</th><th>Status</th><th>Started</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">LS</div>@lumen.studio</div></td>
-                <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
-                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">12m ago</td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">NM</div>@northwind.media</div></td>
-                <td class="muted">TikTok</td><td class="muted">Engagement swap</td>
-                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">38m ago</td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">KC</div>@kwame.codes</div></td>
-                <td class="muted">X</td><td class="muted">Follow ↔ Follow</td>
-                <td><span class="badge pending"><span class="dot"></span>Pending</span></td><td class="muted">1h ago</td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">MC</div>@marigold.co</div></td>
-                <td class="muted">YouTube</td><td class="muted">Comment swap</td>
-                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">2h ago</td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">DC</div>@driftandco</div></td>
-                <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
-                <td><span class="badge completed"><span class="dot"></span>Completed</span></td><td class="muted">5h ago</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Creator</th><th>Platform</th><th>Exchange</th><th>Status</th><th>Started</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">LS</div>@lumen.studio</div></td>
+                  <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
+                  <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">12m ago</td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">NM</div>@northwind.media</div></td>
+                  <td class="muted">TikTok</td><td class="muted">Engagement swap</td>
+                  <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">38m ago</td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">KC</div>@kwame.codes</div></td>
+                  <td class="muted">X</td><td class="muted">Follow ↔ Follow</td>
+                  <td><span class="badge pending"><span class="dot"></span>Pending</span></td><td class="muted">1h ago</td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">MC</div>@marigold.co</div></td>
+                  <td class="muted">YouTube</td><td class="muted">Comment swap</td>
+                  <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">2h ago</td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">DC</div>@driftandco</div></td>
+                  <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
+                  <td><span class="badge completed"><span class="dot"></span>Completed</span></td><td class="muted">5h ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -818,41 +901,43 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
             </div>
             <button class="btn btn-primary" onclick="openBarterModal()">New Barter</button>
           </div>
-          <table class="table">
-            <thead><tr><th>Creator</th><th>Platform</th><th>Exchange</th><th>Status</th><th>Started</th><th>Action</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">LS</div>@lumen.studio</div></td>
-                <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
-                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">12m ago</td>
-                <td><button class="btn btn-ghost btn-sm">Message</button></td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">NM</div>@northwind.media</div></td>
-                <td class="muted">TikTok</td><td class="muted">Engagement swap</td>
-                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">38m ago</td>
-                <td><button class="btn btn-ghost btn-sm">Message</button></td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">KC</div>@kwame.codes</div></td>
-                <td class="muted">X</td><td class="muted">Follow ↔ Follow</td>
-                <td><span class="badge pending"><span class="dot"></span>Pending</span></td><td class="muted">1h ago</td>
-                <td><button class="btn btn-primary btn-sm">Accept</button></td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">MC</div>@marigold.co</div></td>
-                <td class="muted">YouTube</td><td class="muted">Comment swap</td>
-                <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">2h ago</td>
-                <td><button class="btn btn-ghost btn-sm">Message</button></td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">DC</div>@driftandco</div></td>
-                <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
-                <td><span class="badge completed"><span class="dot"></span>Completed</span></td><td class="muted">5h ago</td>
-                <td><button class="btn btn-ghost btn-sm">Review</button></td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>Creator</th><th>Platform</th><th>Exchange</th><th>Status</th><th>Started</th><th>Action</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">LS</div>@lumen.studio</div></td>
+                  <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
+                  <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">12m ago</td>
+                  <td><button class="btn btn-ghost btn-sm">Message</button></td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">NM</div>@northwind.media</div></td>
+                  <td class="muted">TikTok</td><td class="muted">Engagement swap</td>
+                  <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">38m ago</td>
+                  <td><button class="btn btn-ghost btn-sm">Message</button></td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">KC</div>@kwame.codes</div></td>
+                  <td class="muted">X</td><td class="muted">Follow ↔ Follow</td>
+                  <td><span class="badge pending"><span class="dot"></span>Pending</span></td><td class="muted">1h ago</td>
+                  <td><button class="btn btn-primary btn-sm">Accept</button></td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">MC</div>@marigold.co</div></td>
+                  <td class="muted">YouTube</td><td class="muted">Comment swap</td>
+                  <td><span class="badge active"><span class="dot"></span>Active</span></td><td class="muted">2h ago</td>
+                  <td><button class="btn btn-ghost btn-sm">Message</button></td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">DC</div>@driftandco</div></td>
+                  <td class="muted">Instagram</td><td class="muted">Follow ↔ Follow</td>
+                  <td><span class="badge completed"><span class="dot"></span>Completed</span></td><td class="muted">5h ago</td>
+                  <td><button class="btn btn-ghost btn-sm">Review</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -953,29 +1038,31 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
           <div class="card-head">
             <h2>Recent Referrals</h2>
           </div>
-          <table class="table">
-            <thead><tr><th>User</th><th>Joined Date</th><th>Status</th><th>Reward</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">JD</div>Jane Doe</div></td>
-                <td class="muted">Oct 24, 2026</td>
-                <td><span class="badge completed"><span class="dot"></span>Active</span></td>
-                <td style="color:var(--mist); font-weight:600;">+50 XP</td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">MK</div>Mike Klein</div></td>
-                <td class="muted">Oct 22, 2026</td>
-                <td><span class="badge pending"><span class="dot"></span>Pending Activation</span></td>
-                <td class="muted">-</td>
-              </tr>
-              <tr>
-                <td><div class="row-creator"><div class="mini-avatar">AL</div>Alex Lee</div></td>
-                <td class="muted">Oct 15, 2026</td>
-                <td><span class="badge completed"><span class="dot"></span>Active</span></td>
-                <td style="color:var(--mist); font-weight:600;">+50 XP</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table class="table">
+              <thead><tr><th>User</th><th>Joined Date</th><th>Status</th><th>Reward</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">JD</div>Jane Doe</div></td>
+                  <td class="muted">Oct 24, 2026</td>
+                  <td><span class="badge completed"><span class="dot"></span>Active</span></td>
+                  <td style="color:var(--mist); font-weight:600;">+50 XP</td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">MK</div>Mike Klein</div></td>
+                  <td class="muted">Oct 22, 2026</td>
+                  <td><span class="badge pending"><span class="dot"></span>Pending Activation</span></td>
+                  <td class="muted">-</td>
+                </tr>
+                <tr>
+                  <td><div class="row-creator"><div class="mini-avatar">AL</div>Alex Lee</div></td>
+                  <td class="muted">Oct 15, 2026</td>
+                  <td><span class="badge completed"><span class="dot"></span>Active</span></td>
+                  <td style="color:var(--mist); font-weight:600;">+50 XP</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -1057,7 +1144,7 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
             </div>
           </div>
           
-          <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
+          <div class="profile-edit-avatar-row" style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
             <div class="profile-edit-avatar">CR</div>
             <div style="flex: 1;">
               <div style="display: flex; gap: 12px; margin-bottom: 12px;">
@@ -1068,7 +1155,7 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
             </div>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div class="profile-edit-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
             <div class="form-group" style="margin-bottom: 0;">
               <label class="form-label">First Name</label>
               <input type="text" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(10,10,13,0.35); border: 1px solid var(--glass-border); color: var(--mist); font-size: 0.88rem;" value="Creator">
@@ -1447,6 +1534,8 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
   </div>
 </div>
 
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
 <script>
 // ---- Toggle Platform Connections ----
 function togglePlatform(id) {
@@ -1731,6 +1820,35 @@ document.addEventListener('click', (e) => {
 
   addLine(); addLine(); addLine(); addLine();
   if(!reduceMotion){ setInterval(addLine, 1800); }
+})();
+
+// ============ MOBILE SIDEBAR TOGGLE ============
+(function() {
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const sidebar = document.querySelector('.sidebar');
+  const backdrop = document.getElementById('sidebar-backdrop');
+  
+  if (!menuBtn || !sidebar) return;
+  
+  menuBtn.addEventListener('click', () => {
+    sidebar.classList.add('open');
+    if (backdrop) backdrop.classList.add('open');
+  });
+  
+  if (backdrop) {
+    backdrop.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      backdrop.classList.remove('open');
+    });
+  }
+  
+  const navItems = sidebar.querySelectorAll('[data-nav]');
+  navItems.forEach(item => {
+    item.addEventListener('click', () => {
+      sidebar.classList.remove('open');
+      if (backdrop) backdrop.classList.remove('open');
+    });
+  });
 })();
 </script>
 </body>

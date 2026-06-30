@@ -199,14 +199,6 @@ input{font-family:inherit;}
 .connect-row{display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 0 2px;color:var(--slate);font-size:0.84rem;border-top:1px dashed var(--glass-border);margin-top:6px;}
 .connect-row:hover{color:var(--mist);}
 
-/* ---- SEO keywords ---- */
-.kw-row{display:flex;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid rgba(248,248,255,0.06);font-size:0.85rem;}
-.kw-row:last-child{border-bottom:none;}
-.kw-pos{font-family:var(--font-mono);color:var(--slate);font-size:0.78rem;min-width:46px;}
-.kw-name{flex:1;padding:0 10px;}
-.vis-score{display:flex;align-items:baseline;gap:10px;margin-bottom:18px;}
-.vis-score .big{font-family:var(--font-mono);font-size:2.2rem;font-weight:600;}
-.vis-score .of{font-size:0.85rem;color:var(--slate);}
 
 /* ---- Guardrails ---- */
 .guard-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(248,248,255,0.06);}
@@ -298,20 +290,13 @@ input{font-family:inherit;}
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 20V10"/><path d="M12 20V4"/><path d="M20 20v-7"/></svg>
         <span>Analytics</span>
       </a>
-      <a class="nav-item" data-nav="seo">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="M19 19l-4.5-4.5"/></svg>
-        <span>SEO</span>
-      </a>
-      <a class="nav-item" data-nav="infrastructure">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 010-8 5 5 0 019.6-1.5A4.5 4.5 0 0117.5 18H7z"/></svg>
-        <span>Infrastructure</span>
-      </a>
+
     </div>
 
     <div class="sidebar-spacer"></div>
 
     <div class="nav-group">
-      <a class="nav-item" data-nav>
+      <a class="nav-item" data-nav="settings">
         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M21 12h-2.5M5.5 12H3M18.4 5.6l-1.8 1.8M7.4 16.6l-1.8 1.8M18.4 18.4l-1.8-1.8M7.4 7.4L5.6 5.6"/></svg>
         <span>Settings</span>
       </a>
@@ -911,169 +896,116 @@ input{font-family:inherit;}
       </div>
     </div>
 
-    <!-- SEO PANE -->
-    <div class="content tab-pane" id="seo-pane">
-      <div class="section-row stat-grid">
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">Visibility Score</div><div class="value" data-count="84" data-suffix="%">0%</div></div>
-            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+5%</div>
-          </div>
-          <div class="stat-sub">Semrush integration</div>
-        </div>
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">Organic Traffic</div><div class="value" data-count="12.4" data-suffix="k">0</div></div>
-            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+18%</div>
-          </div>
-          <div class="stat-sub">monthly visitors</div>
-        </div>
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">Indexed Pages</div><div class="value" data-count="412">0</div></div>
-          </div>
-          <div class="stat-sub">via Google Search Console</div>
-        </div>
-      </div>
+
+
+
+
+    <!-- SETTINGS PANE -->
+    <div class="content tab-pane" id="settings-pane">
       
       <div class="section-row row-2-1">
+        
+        <!-- Profile Settings -->
         <div class="card glass" data-reveal>
           <div class="card-head">
-            <h2>Keyword Rankings</h2>
-            <a class="link" href="#">Semrush Details</a>
-          </div>
-          <div class="vis-score">
-            <div class="big">84%</div>
-            <div class="of">Visibility</div>
-          </div>
-          <div>
-            <div class="kw-row">
-              <div class="kw-pos">#1</div>
-              <div class="kw-name">content creator tools</div>
-              <div class="trend"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+2</div>
+            <div>
+              <h2>Profile Settings</h2>
+              <div class="sub">Update your personal information and preferences</div>
             </div>
-            <div class="kw-row">
-              <div class="kw-pos">#3</div>
-              <div class="kw-name">social media growth hack</div>
-              <div class="trend"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+1</div>
-            </div>
-            <div class="kw-row">
-              <div class="kw-pos" style="color:var(--mist);">#8</div>
-              <div class="kw-name">barter engagement</div>
-              <div class="trend down"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>-1</div>
-            </div>
-            <div class="kw-row">
-              <div class="kw-pos" style="color:var(--mist);">#12</div>
-              <div class="kw-name">auto follow script</div>
-              <div class="trend"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+4</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="card glass" data-reveal>
-          <div class="card-head">
-            <h2>Site Health</h2>
-          </div>
-          <div style="margin-bottom:20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.86rem;">
-              <span>Technical SEO</span><span style="font-family:var(--font-mono); color:var(--mist);">92/100</span>
-            </div>
-            <div class="progress"><div class="progress-fill" style="width:0%" data-progress="92"></div></div>
-          </div>
-          <div style="margin-bottom:20px;">
-            <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.86rem;">
-              <span>Core Web Vitals</span><span style="font-family:var(--font-mono); color:var(--mist);">Good</span>
-            </div>
-            <div class="progress"><div class="progress-fill" style="width:0%" data-progress="100"></div></div>
-          </div>
-          <div>
-            <div style="font-size:0.8rem; color:var(--slate); margin-bottom:8px;">Top Issues</div>
-            <div style="font-size:0.84rem; display:flex; align-items:center; gap:8px; padding:6px 0;">
-              <span style="color:#ffaa00;">●</span> 2 pages with slow load times
-            </div>
-            <div style="font-size:0.84rem; display:flex; align-items:center; gap:8px; padding:6px 0;">
-              <span style="color:var(--slate);">●</span> 0 missing meta descriptions
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- INFRASTRUCTURE PANE -->
-    <div class="content tab-pane" id="infrastructure-pane">
-      <div class="section-row stat-grid">
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">System Uptime</div><div class="value" data-count="99.98" data-suffix="%">0%</div></div>
-            <div class="trend"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17L11 11L15 15L19 7"/><path d="M14 7h5v5"/></svg>+0.01%</div>
-          </div>
-          <div class="stat-sub">Google Cloud Platform</div>
-        </div>
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">Avg API Latency</div><div class="value" data-count="124" data-suffix="ms">0</div></div>
-          </div>
-          <div class="stat-sub">global edge network</div>
-        </div>
-        <div class="stat-card glass spotlight" data-reveal>
-          <div class="stat-top">
-            <div><div class="label">Background Jobs</div><div class="value" data-count="14.2" data-suffix="k">0</div></div>
-          </div>
-          <div class="stat-sub">processed today</div>
-        </div>
-      </div>
-      
-      <div class="section-row row-2-1">
-        <div class="card glass" data-reveal>
-          <div class="card-head">
-            <h2>Task Coordinator &amp; Jitter Queues</h2>
-            <div class="badge active"><span class="dot"></span>System Healthy</div>
           </div>
           
-          <div class="guard-row">
-            <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></div>
-            <div class="guard-text">
-              <div class="t">Orchestration Layer</div>
-              <div class="d">Currently coordinating 84 active waves and 1,205 node connections. Memory usage at 42%.</div>
+          <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
+            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(248,248,255,0.1); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; flex-shrink: 0;">CR</div>
+            <div style="flex: 1;">
+              <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+                <button class="btn btn-primary btn-sm">Upload Avatar</button>
+                <button class="btn btn-ghost btn-sm">Remove</button>
+              </div>
+              <div style="font-size: 0.8rem; color: var(--slate);">Recommended size: 256x256px. JPG, GIF, or PNG.</div>
             </div>
           </div>
 
-          <div class="guard-row" style="border-bottom:none;">
-            <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg></div>
-            <div class="guard-text" style="width:100%;">
-              <div class="t">Jitter Delay Monitor</div>
-              <div class="d">Active staggering across all connected platforms to prevent API bans.</div>
-              <div class="log-feed" id="infraLogFeed" style="height: 180px;"></div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">First Name</label>
+              <input type="text" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(10,10,13,0.35); border: 1px solid var(--glass-border); color: var(--mist); font-size: 0.88rem;" value="Creator">
+            </div>
+            <div class="form-group" style="margin-bottom: 0;">
+              <label class="form-label">Last Name</label>
+              <input type="text" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(10,10,13,0.35); border: 1px solid var(--glass-border); color: var(--mist); font-size: 0.88rem;" value="Account">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" style="width: 100%; padding: 10px 14px; border-radius: var(--radius-sm); background: rgba(10,10,13,0.35); border: 1px solid var(--glass-border); color: var(--mist); font-size: 0.88rem;" value="creator@example.com">
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">Theme Preference</label>
+            <div class="custom-select">
+              <div class="select-trigger">
+                <span class="select-value">Dark Mode (Default)</span>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+              </div>
+              <div class="select-dropdown">
+                <label class="select-option"><input type="checkbox" value="System" checked> System Default</label>
+                <label class="select-option"><input type="checkbox" value="Dark"> Dark Mode</label>
+                <label class="select-option"><input type="checkbox" value="Light"> Light Mode</label>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 24px; display: flex; justify-content: flex-end;">
+            <button class="btn btn-primary" onclick="alert('Profile updated')">Save Changes</button>
+          </div>
+        </div>
+
+        <!-- Plan and Security -->
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div class="card glass" data-reveal>
+            <div class="card-head">
+              <h2>Subscription Plan</h2>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="font-size: 1.1rem; font-weight: 600; font-family: var(--font-display); margin-bottom: 4px;">Free Plan</div>
+              <div style="font-size: 0.84rem; color: var(--slate);">You are currently on the free tier.</div>
+            </div>
+            <div style="margin-bottom: 16px;">
+              <div style="font-size: 0.84rem; display: flex; justify-content: space-between; margin-bottom: 6px;">
+                <span>Monthly Wave Limits</span>
+                <span style="font-family: var(--font-mono); color: var(--mist);">14 / 20</span>
+              </div>
+              <div class="progress"><div class="progress-fill" style="width: 0%" data-progress="70"></div></div>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;">Upgrade to Pro</button>
+          </div>
+
+          <div class="card glass" data-reveal>
+            <div class="card-head">
+              <h2>Security</h2>
+            </div>
+            <div class="guard-row" style="padding-top: 0;">
+              <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+              <div class="guard-text">
+                <div class="t">Change Password</div>
+                <div class="d">Update your account password securely.</div>
+              </div>
+            </div>
+            <div class="guard-row" style="border-bottom: none; padding-bottom: 0;">
+              <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+              <div class="guard-text">
+                <div class="t">Two-Factor Auth</div>
+                <div class="d">Add an extra layer of security.</div>
+              </div>
+              <div style="flex-shrink:0;">
+                <button class="btn btn-ghost btn-sm">Enable</button>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="card glass" data-reveal>
-          <div class="card-head">
-            <h2>Data Sync Status</h2>
-          </div>
-          <div class="platform-row">
-            <div class="platform-icon">DB</div>
-            <div class="platform-info"><div class="pname">Main Cluster</div><div class="pcount">Synced 2m ago</div></div>
-            <div class="trend" style="color:var(--current);">Healthy</div>
-          </div>
-          <div class="platform-row">
-            <div class="platform-icon">SC</div>
-            <div class="platform-info"><div class="pname">Search Console</div><div class="pcount">Synced 14m ago</div></div>
-            <div class="trend" style="color:var(--current);">Healthy</div>
-          </div>
-          <div class="platform-row">
-            <div class="platform-icon" style="font-size:0.6rem;">SEMR</div>
-            <div class="platform-info"><div class="pname">Semrush API</div><div class="pcount">Synced 1h ago</div></div>
-            <div class="trend" style="color:var(--current);">Healthy</div>
-          </div>
-          <div class="platform-row">
-            <div class="platform-icon">GCP</div>
-            <div class="platform-info"><div class="pname">Cloud Storage</div><div class="pcount">Real-time</div></div>
-            <div class="trend" style="color:var(--current);">Healthy</div>
-          </div>
-        </div>
       </div>
+
     </div>
   </main>
 </div>

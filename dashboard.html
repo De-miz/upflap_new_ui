@@ -374,11 +374,11 @@ input{font-family:inherit;}
 .guard-row{display:flex;align-items:flex-start;gap:14px;padding:14px 0;border-bottom:1px solid rgba(248,248,255,0.06);}
 .guard-row:last-of-type{border-bottom:none;}
 .guard-icon{width:34px;height:34px;border-radius:10px;background:rgba(248,248,255,0.06);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--current);}
-.guard-text{flex:1;}
+.guard-text{flex:1; min-width: 0;}
 .guard-text .t{font-size:0.88rem;font-weight:600;}
 .guard-text .d{font-size:0.78rem;color:var(--slate);margin-top:2px;}
 
-.log-feed{margin-top:6px;border-radius:var(--radius-sm);background:rgba(0,0,0,0.25);border:1px solid var(--glass-border);padding:12px 14px;height:128px;overflow:hidden;display:flex;flex-direction:column;gap:6px;}
+.log-feed{margin-top:6px;border-radius:var(--radius-sm);background:rgba(0,0,0,0.25);border:1px solid var(--glass-border);padding:12px 14px;height:128px;overflow:hidden;display:flex;flex-direction:column;gap:6px;height: 150px;}
 .log-line{font-family:var(--font-mono);font-size:0.72rem;color:var(--slate);opacity:0;transform:translateY(4px);transition:opacity .4s ease,transform .4s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .log-line.show{opacity:1;transform:translateY(0);}
 .log-line .t{color:var(--current);}
@@ -437,8 +437,8 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
 /* ---- Platform Connection Row ---- */
 .conn-row { padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: rgba(10,10,13,0.35); margin-bottom: 12px; }
 .conn-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-.conn-info { flex: 1; display: flex; align-items: center; gap: 12px; }
-.conn-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(248,248,255,0.06); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; }
+.conn-info { flex: 1; display: flex; align-items: center; gap: 12px; min-width: 0; }
+.conn-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(248,248,255,0.06); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; flex-shrink: 0; }
 .conn-details { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--glass-border); }
 .conn-details.open { display: block; }
 .conn-option { display: flex; align-items: center; justify-content: space-between; font-size: 0.86rem; color: var(--mist); margin-bottom: 12px; }
@@ -856,7 +856,7 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
 
           <div class="guard-row" style="border-bottom:none;">
             <div class="guard-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="13" r="7"/><path d="M12 9v4l3 2"/><path d="M9 2h6"/></svg></div>
-            <div class="guard-text" style="width:100%;">
+            <div class="guard-text">
               <div class="t">Jitter delay queue</div>
               <div class="d">Staggering requests to keep activity paced like a human.</div>
               <div class="log-feed" id="logFeed"></div>

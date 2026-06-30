@@ -151,13 +151,22 @@ ul{list-style:none;}
 
 /*  NAV  */
 .nav{position:fixed;top:18px;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:0 20px;}
-.nav-inner{display:flex;align-items:center;gap:32px;width:min(920px,100%);padding:12px 12px 12px 24px;border-radius:100px;}
+.nav-container{width:min(920px,100%);display:flex;flex-direction:column;gap:8px;}
+.nav-inner{display:flex;align-items:center;gap:20px;width:100%;padding:12px 12px 12px 24px;border-radius:100px;}
 .nav-logo{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:-0.01em;margin-right:auto;}
 .nav-logo span{opacity:0.7;}
 .nav-links{display:flex;gap:28px;font-size:0.92rem;color:var(--slate);}
 .nav-links a{transition:color .2s;}
 .nav-links a:hover{color:var(--mist);}
-@media(max-width:760px){.nav-links{display:none;}}
+.mobile-menu-btn{display:none;}
+.mobile-nav-menu{display:none;flex-direction:column;padding:16px 24px;border-radius:var(--radius-md);gap:16px;font-size:0.95rem;}
+.mobile-nav-menu.open{display:flex;}
+.mobile-nav-menu a{color:var(--slate);transition:color .2s;padding:4px 0;}
+.mobile-nav-menu a:hover{color:var(--mist);}
+@media(max-width:760px){
+  .nav-links{display:none;}
+  .mobile-menu-btn{display:inline-flex;}
+}
 
 /*  HERO  */
 .hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:160px 0 80px;overflow:hidden;}
@@ -269,34 +278,102 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 .footer-links a{transition:color .2s;}
 .footer-links a:hover{color:var(--mist);}
 
+/*  RESPONSIVE UTILITIES  */
+@media(max-width: 760px) {
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    align-items: stretch;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    width: 100%;
+    gap: 12px;
+  }
+  .chip {
+    min-width: 0;
+    width: 100%;
+  }
+  .tab-switch {
+    display: flex;
+    width: 100%;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 10px 8px !important;
+  }
+  .stat-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .cta-form {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cta-form input, .cta-form .btn {
+    width: 100%;
+    text-align: center;
+  }
+  footer .container {
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+  .footer-links {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+}
+
 </style>
 </head>
 <body>
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="nav">
-  <div class="nav-inner glass">
-    <div class="nav-logo">Up<span>flap</span></div>
-    <div class="nav-links">
+  <div class="nav-container">
+    <div class="nav-inner glass">
+      <div class="nav-logo">Up<span>flap</span></div>
+      <div class="nav-links">
+        <a href="#features">Network</a>
+        <a href="#showcase">How it works</a>
+        <a href="dashboard.html">Dashboard</a>
+      </div>
+      <button class="icon-btn spotlight" id="theme-toggle-btn" aria-label="Toggle Theme">
+        <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5" class="sun-element"/>
+          <line x1="12" y1="1" x2="12" y2="3" class="sun-element"/>
+          <line x1="12" y1="21" x2="12" y2="23" class="sun-element"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="sun-element"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="sun-element"/>
+          <line x1="1" y1="12" x2="3" y2="12" class="sun-element"/>
+          <line x1="21" y1="12" x2="23" y2="12" class="sun-element"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-element"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-element"/>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79" class="moon-element" style="display:none;"/>
+        </svg>
+      </button>
+      <button class="icon-btn spotlight mobile-menu-btn" id="mobile-menu-btn" aria-label="Toggle Menu">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="12" x2="20" y2="12"/>
+          <line x1="4" y1="6" x2="20" y2="6"/>
+          <line x1="4" y1="18" x2="20" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="mobile-nav-menu glass" id="mobile-nav-menu">
       <a href="#features">Network</a>
       <a href="#showcase">How it works</a>
       <a href="dashboard.html">Dashboard</a>
     </div>
-    <button class="icon-btn spotlight" id="theme-toggle-btn" aria-label="Toggle Theme" style="margin-right: 8px;">
-      <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5" class="sun-element"/>
-        <line x1="12" y1="1" x2="12" y2="3" class="sun-element"/>
-        <line x1="12" y1="21" x2="12" y2="23" class="sun-element"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="sun-element"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="sun-element"/>
-        <line x1="1" y1="12" x2="3" y2="12" class="sun-element"/>
-        <line x1="21" y1="12" x2="23" y2="12" class="sun-element"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-element"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-element"/>
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79" class="moon-element" style="display:none;"/>
-      </svg>
-    </button>
-    <button class="btn btn-primary spotlight">Get early access</button>
   </div>
 </nav>
 
@@ -310,8 +387,7 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
       <h1>Outgrow the algorithm.<br><span class="accent">Together.</span></h1>
       <p class="lead">Upflap is the interest-driven network for creators, influencers, and digital marketers — trade engagement, track real growth, and scale your presence without spending a cent on ads.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary spotlight">Get early access</button>
-        <a href="#showcase" class="btn btn-ghost spotlight">See how a wave works</a>
+        <a href="#showcase" class="btn btn-primary spotlight">See how a wave works</a>
       </div>
       <div class="hero-chips">
         <div class="chip glass" data-reveal>
@@ -715,6 +791,21 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
     
     const currentTheme = localStorage.getItem('theme') || 'dark';
     updateThemeUI(currentTheme);
+  })();
+
+  //  MOBILE MENU TOGGLE
+  (function(){
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-nav-menu');
+    if(!menuBtn || !menu) return;
+    menuBtn.addEventListener('click', () => {
+      menu.classList.toggle('open');
+    });
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.remove('open');
+      });
+    });
   })();
 </script>
 </body>

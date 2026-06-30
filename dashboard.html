@@ -7,6 +7,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    const theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <style>
 
 /* ============ RESET & TOKENS ============ */
@@ -31,6 +37,110 @@ html{scroll-behavior:smooth;}
   --radius-md:14px;
   --radius-sm:10px;
 }
+[data-theme="light"] {
+  --dusk:#F3F3F6;
+  --dusk-2:#FFFFFF;
+  --steel:#DCDCE3;
+  --flare:#0A0A0D;
+  --flare-2:#1C1C20;
+  --current:#52525B;
+  --mist:#0A0A0D;
+  --slate:#62626A;
+  --glass-bg:rgba(10,10,13,0.035);
+  --glass-bg-strong:rgba(10,10,13,0.07);
+  --glass-border:rgba(10,10,13,0.08);
+}
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(700px 520px at 8% -10%, rgba(180,180,200,0.18), transparent 60%),
+    radial-gradient(700px 560px at 100% 100%, rgba(100,100,120,0.05), transparent 60%);
+}
+[data-theme="light"] .topbar {
+  background:rgba(243,243,246,0.75);
+  border-bottom:1px solid rgba(10,10,13,0.08);
+}
+[data-theme="light"] .grid-line {
+  stroke:rgba(10,10,13,0.06);
+}
+[data-theme="light"] .progress {
+  background:rgba(10,10,13,0.06);
+}
+[data-theme="light"] .tag {
+  background:rgba(10,10,13,0.04);
+}
+[data-theme="light"] .platform-row,
+[data-theme="light"] .guard-row {
+  border-bottom:1px solid rgba(10,10,13,0.06);
+}
+[data-theme="light"] .platform-icon,
+[data-theme="light"] .guard-icon {
+  background:rgba(10,10,13,0.05);
+}
+[data-theme="light"] .log-feed {
+  background:rgba(255,255,255,0.7);
+  border-color:rgba(10,10,13,0.08);
+}
+[data-theme="light"] .select-trigger {
+  background:rgba(255,255,255,0.7);
+  border-color:rgba(10,10,13,0.08);
+}
+[data-theme="light"] .select-dropdown {
+  background:rgba(255,255,255,0.95);
+  border-color:rgba(10,10,13,0.08);
+  box-shadow:0 10px 30px rgba(10,10,13,0.08);
+}
+[data-theme="light"] .select-option:hover {
+  background:rgba(10,10,13,0.04);
+}
+[data-theme="light"] .conn-row {
+  background:rgba(255,255,255,0.85);
+  border-color:rgba(10,10,13,0.08);
+}
+[data-theme="light"] .conn-icon {
+  background:rgba(10,10,13,0.04);
+}
+[data-theme="light"] .profile-card .avatar {
+  background:rgba(10,10,13,0.06);
+}
+.detail-tile {
+  background:rgba(248,248,255,0.03);
+  border:1px solid var(--glass-border);
+  padding:16px;
+  border-radius:var(--radius-sm);
+}
+[data-theme="light"] .detail-tile {
+  background:rgba(10,10,13,0.03);
+}
+.ref-link-box {
+  padding:10px 16px;
+  background:rgba(10,10,13,0.5);
+  border:1px solid var(--glass-border);
+  border-radius:var(--radius-sm);
+  font-family:var(--font-mono);
+  font-size:0.8rem;
+  color:var(--current);
+}
+[data-theme="light"] .ref-link-box {
+  background:rgba(255,255,255,0.7);
+}
+.profile-edit-avatar {
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  background:rgba(248,248,255,0.1);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--font-mono);
+  font-size:1.5rem;
+  flex-shrink:0;
+}
+[data-theme="light"] .profile-edit-avatar {
+  background:rgba(10,10,13,0.08);
+}
+.select-option input[type="radio"] { appearance: none; width: 16px; height: 16px; border: 1.5px solid var(--slate); border-radius: 50%; background: transparent; cursor: pointer; position: relative; flex-shrink: 0; }
+.select-option input[type="radio"]:checked { background: var(--flare); border-color: var(--flare); }
+.select-option input[type="radio"]:checked::after { content: ''; position: absolute; top: 4px; left: 4px; width: 6px; height: 6px; border-radius: 50%; background: var(--dusk); }
 body{
   font-family:var(--font-body);
   color:var(--mist);
@@ -334,6 +444,20 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
   <main class="main">
     <div class="topbar">
       <h1 id="topbar-title">Waves</h1>
+      <button class="icon-btn spotlight" id="theme-toggle-btn" aria-label="Toggle Theme" style="margin-right: 8px;">
+        <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5" class="sun-element"/>
+          <line x1="12" y1="1" x2="12" y2="3" class="sun-element"/>
+          <line x1="12" y1="21" x2="12" y2="23" class="sun-element"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="sun-element"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="sun-element"/>
+          <line x1="1" y1="12" x2="3" y2="12" class="sun-element"/>
+          <line x1="21" y1="12" x2="23" y2="12" class="sun-element"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-element"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-element"/>
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79" class="moon-element" style="display:none;"/>
+        </svg>
+      </button>
       <button class="icon-btn spotlight" id="notifications-btn" aria-label="Notifications">
         <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0112 0c0 4 1.5 5.5 1.5 5.5H4.5S6 13 6 9z"/><path d="M10 19a2 2 0 004 0"/></svg>
         <span class="bell-dot"></span>
@@ -817,7 +941,7 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
             <div style="font-size: 0.84rem; color: var(--slate);">Get 50 XP for every creator that signs up using your unique link.</div>
           </div>
           <div style="display: flex; gap: 8px; align-items: center;">
-            <div style="padding: 10px 16px; background: rgba(10,10,13,0.5); border: 1px solid var(--glass-border); border-radius: var(--radius-sm); font-family: var(--font-mono); font-size: 0.8rem; color: var(--current);">upflap.com/r/creator123</div>
+          <div class="ref-link-box">upflap.com/r/creator123</div>
             <button class="btn btn-primary" onclick="alert('Link copied to clipboard')">Copy Link</button>
           </div>
         </div>
@@ -934,7 +1058,7 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
           </div>
           
           <div style="display: flex; gap: 24px; align-items: flex-start; margin-bottom: 24px;">
-            <div style="width: 80px; height: 80px; border-radius: 50%; background: rgba(248,248,255,0.1); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 1.5rem; flex-shrink: 0;">CR</div>
+            <div class="profile-edit-avatar">CR</div>
             <div style="flex: 1;">
               <div style="display: flex; gap: 12px; margin-bottom: 12px;">
                 <button class="btn btn-primary btn-sm">Upload Avatar</button>
@@ -961,15 +1085,14 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
           
           <div class="form-group">
             <label class="form-label">Theme Preference</label>
-            <div class="custom-select">
+            <div class="custom-select" id="theme-select-container">
               <div class="select-trigger">
-                <span class="select-value">Dark Mode (Default)</span>
+                <span class="select-value">Dark Mode</span>
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
               </div>
               <div class="select-dropdown">
-                <label class="select-option"><input type="checkbox" value="System" checked> System Default</label>
-                <label class="select-option"><input type="checkbox" value="Dark"> Dark Mode</label>
-                <label class="select-option"><input type="checkbox" value="Light"> Light Mode</label>
+                <label class="select-option"><input type="radio" name="theme-pref" value="dark" checked> Dark Mode</label>
+                <label class="select-option"><input type="radio" name="theme-pref" value="light"> Light Mode</label>
               </div>
             </div>
           </div>
@@ -1247,11 +1370,11 @@ input:checked + .slider:before { transform: translateX(20px); background-color: 
     <div class="modal-desc">Lifestyle &amp; Creators (Tier 2)</div>
     
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
-      <div style="background:rgba(248,248,255,0.03); border:1px solid var(--glass-border); padding:16px; border-radius:var(--radius-sm);">
+      <div class="detail-tile">
         <div style="font-size:0.74rem; color:var(--slate); font-family:var(--font-mono); text-transform:uppercase; margin-bottom:8px;">Participants</div>
         <div style="font-size:1.4rem; font-weight:600; font-family:var(--font-mono); color:var(--mist);">450 <span style="font-size:0.8rem; color:var(--slate); font-weight:400;">/ 1125</span></div>
       </div>
-      <div style="background:rgba(248,248,255,0.03); border:1px solid var(--glass-border); padding:16px; border-radius:var(--radius-sm);">
+      <div class="detail-tile">
         <div style="font-size:0.74rem; color:var(--slate); font-family:var(--font-mono); text-transform:uppercase; margin-bottom:8px;">Time Left</div>
         <div style="font-size:1.4rem; font-weight:600; font-family:var(--font-mono); color:var(--current);">18h 45m</div>
       </div>
@@ -1451,6 +1574,66 @@ document.addEventListener('click', (e) => {
       el.style.setProperty('--my', (e.clientY - r.top) + 'px');
     });
   });
+})();
+
+// ============ THEME SWITCHER ============
+(function() {
+  const toggleBtn = document.getElementById('theme-toggle-btn');
+  if (!toggleBtn) return;
+  
+  const themeIcon = document.getElementById('theme-icon');
+  const sunElements = themeIcon.querySelectorAll('.sun-element');
+  const moonElement = themeIcon.querySelector('.moon-element');
+  
+  window.updateThemeGlobal = function(theme) {
+    if (theme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      sunElements.forEach(el => el.style.display = 'none');
+      moonElement.style.display = 'block';
+      
+      const lightRadio = document.querySelector('input[name="theme-pref"][value="light"]');
+      if (lightRadio) {
+        lightRadio.checked = true;
+        const selectVal = document.querySelector('#theme-select-container .select-value');
+        if (selectVal) selectVal.textContent = 'Light Mode';
+      }
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      sunElements.forEach(el => el.style.display = 'block');
+      moonElement.style.display = 'none';
+      
+      const darkRadio = document.querySelector('input[name="theme-pref"][value="dark"]');
+      if (darkRadio) {
+        darkRadio.checked = true;
+        const selectVal = document.querySelector('#theme-select-container .select-value');
+        if (selectVal) selectVal.textContent = 'Dark Mode';
+      }
+    }
+  };
+  
+  toggleBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    localStorage.setItem('theme', newTheme);
+    window.updateThemeGlobal(newTheme);
+  });
+  
+  const themeSelect = document.getElementById('theme-select-container');
+  if (themeSelect) {
+    const radios = themeSelect.querySelectorAll('input[name="theme-pref"]');
+    radios.forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          const val = e.target.value;
+          localStorage.setItem('theme', val);
+          window.updateThemeGlobal(val);
+        }
+      });
+    });
+  }
+  
+  const currentTheme = localStorage.getItem('theme') || 'dark';
+  window.updateThemeGlobal(currentTheme);
 })();
 
 // ============ NAV ACTIVE STATE ============

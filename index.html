@@ -8,6 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    const theme = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+  })();
+</script>
 <style>
 
 /*  RESET & BASE  */
@@ -52,6 +58,54 @@ ul{list-style:none;}
   --radius-md:16px;
   --radius-sm:10px;
 }
+[data-theme="light"] {
+  --dusk:#F3F3F6;
+  --dusk-2:#FFFFFF;
+  --twilight:#E2E2E8;
+  --flare:#0A0A0D;
+  --flare-2:#1C1C20;
+  --current:#52525B;
+  --mist:#0A0A0D;
+  --slate:#62626A;
+  --glass-bg:rgba(10,10,13,0.035);
+  --glass-bg-strong:rgba(10,10,13,0.07);
+  --glass-border:rgba(10,10,13,0.08);
+}
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(700px 520px at 10% -8%, rgba(180,180,200,0.18), transparent 60%),
+    radial-gradient(820px 600px at 112% 12%, rgba(100,100,120,0.05), transparent 60%),
+    radial-gradient(640px 520px at 88% 82%, rgba(100,100,120,0.05), transparent 60%);
+}
+[data-theme="light"] .btn-primary {
+  box-shadow:0 8px 24px rgba(10,10,13,0.12);
+}
+[data-theme="light"] .btn-primary:hover {
+  box-shadow:0 12px 30px rgba(10,10,13,0.2);
+}
+[data-theme="light"] .feature-card:hover {
+  border-color:rgba(10,10,13,0.15);
+}
+[data-theme="light"] .feature-card .icon {
+  background:rgba(10,10,13,0.04);
+}
+[data-theme="light"] .feature-card .icon.cool {
+  background:rgba(10,10,13,0.02);
+}
+[data-theme="light"] .stat-tile {
+  background:rgba(10,10,13,0.03);
+}
+[data-theme="light"] .cta-card::before {
+  background:linear-gradient(120deg,var(--current),var(--twilight));
+  opacity:0.12;
+}
+[data-theme="light"] .cta-form input {
+  background:rgba(255,255,255,0.8);
+  border-color:rgba(10,10,13,0.08);
+  color:var(--mist);
+}
+.icon-btn{width:38px;height:38px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--glass-bg);border:1px solid var(--glass-border);position:relative;transition:background .2s, border-color .2s;color:var(--mist);}
+.icon-btn:hover{background:var(--glass-bg-strong);}
 
 .grain{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.05;mix-blend-mode:overlay;
   background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%25" height="100%25" filter="url(%23n)"/></svg>');
@@ -228,6 +282,20 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
       <a href="#showcase">How it works</a>
       <a href="dashboard.html">Dashboard</a>
     </div>
+    <button class="icon-btn spotlight" id="theme-toggle-btn" aria-label="Toggle Theme" style="margin-right: 8px;">
+      <svg id="theme-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5" class="sun-element"/>
+        <line x1="12" y1="1" x2="12" y2="3" class="sun-element"/>
+        <line x1="12" y1="21" x2="12" y2="23" class="sun-element"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="sun-element"/>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="sun-element"/>
+        <line x1="1" y1="12" x2="3" y2="12" class="sun-element"/>
+        <line x1="21" y1="12" x2="23" y2="12" class="sun-element"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-element"/>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-element"/>
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79" class="moon-element" style="display:none;"/>
+      </svg>
+    </button>
     <button class="btn btn-primary spotlight">Get early access</button>
   </div>
 </nav>
@@ -512,7 +580,8 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
         const dx = a.x - b.x, dy = a.y - b.y;
         const d = Math.hypot(dx, dy);
         if(d < 90){
-          ctx.strokeStyle = `rgba(248,248,255,${(1 - d / 90) * 0.12})`;
+          const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+          ctx.strokeStyle = isLight ? `rgba(10,10,13,${(1 - d / 90) * 0.08})` : `rgba(248,248,255,${(1 - d / 90) * 0.12})`;
           ctx.lineWidth = 1;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
         }
@@ -521,10 +590,15 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
     for(const n of nodes){
       const pulse = 1.5 + Math.sin(t * 0.002 + n.phase) * 0.6;
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light';
       ctx.beginPath();
-      ctx.fillStyle = n.warm ? 'rgba(255,255,255,0.95)' : 'rgba(183,183,192,0.85)';
-      ctx.shadowColor = n.warm ? 'rgba(255,255,255,0.55)' : 'rgba(183,183,192,0.4)';
-      ctx.shadowBlur = 8;
+      ctx.fillStyle = isLight 
+        ? (n.warm ? 'rgba(10,10,13,0.85)' : 'rgba(90,90,100,0.65)')
+        : (n.warm ? 'rgba(255,255,255,0.95)' : 'rgba(183,183,192,0.85)');
+      ctx.shadowColor = isLight
+        ? (n.warm ? 'rgba(10,10,13,0.2)' : 'rgba(90,90,100,0.1)')
+        : (n.warm ? 'rgba(255,255,255,0.55)' : 'rgba(183,183,192,0.4)');
+      ctx.shadowBlur = isLight ? 4 : 8;
       ctx.arc(n.x, n.y, Math.max(pulse, 0.5), 0, Math.PI * 2);
       ctx.fill();
     }
@@ -602,14 +676,46 @@ footer .container{display:flex;justify-content:space-between;align-items:center;
 
 //  SPOTLIGHT CURSOR 
 (function(){
-  document.querySelectorAll('.spotlight').forEach(el => {
-    el.addEventListener('pointermove', e => {
-      const r = el.getBoundingClientRect();
-      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    document.querySelectorAll('.spotlight').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+        el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+      });
     });
-  });
-})();
+  })();
+
+  //  THEME TOGGLE MECHANISM
+  (function() {
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    if (!toggleBtn) return;
+    
+    const themeIcon = document.getElementById('theme-icon');
+    const sunElements = themeIcon.querySelectorAll('.sun-element');
+    const moonElement = themeIcon.querySelector('.moon-element');
+    
+    function updateThemeUI(theme) {
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        sunElements.forEach(el => el.style.display = 'none');
+        moonElement.style.display = 'block';
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        sunElements.forEach(el => el.style.display = 'block');
+        moonElement.style.display = 'none';
+      }
+    }
+    
+    toggleBtn.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      updateThemeUI(newTheme);
+    });
+    
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    updateThemeUI(currentTheme);
+  })();
 </script>
 </body>
 </html>

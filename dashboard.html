@@ -251,6 +251,25 @@ input{font-family:inherit;}
   .topbar{padding:14px 18px;}
   .card{padding:20px;}
 }
+/* ---- Toggle Switch ---- */
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; inset: 0; background-color: rgba(248,248,255,0.1); border: 1px solid var(--glass-border); border-radius: 24px; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: var(--slate); border-radius: 50%; transition: .4s; }
+input:checked + .slider { background-color: var(--current); border-color: var(--current); }
+input:checked + .slider:before { transform: translateX(20px); background-color: var(--dusk); }
+
+/* ---- Platform Connection Row ---- */
+.conn-row { padding: 16px; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: rgba(10,10,13,0.35); margin-bottom: 12px; }
+.conn-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.conn-info { flex: 1; display: flex; align-items: center; gap: 12px; }
+.conn-icon { width: 36px; height: 36px; border-radius: 10px; background: rgba(248,248,255,0.06); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 0.8rem; }
+.conn-details { display: none; margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--glass-border); }
+.conn-details.open { display: block; }
+.conn-option { display: flex; align-items: center; justify-content: space-between; font-size: 0.86rem; color: var(--mist); margin-bottom: 12px; }
+.conn-option:last-child { margin-bottom: 0; }
+.conn-option .opt-text { color: var(--slate); font-size: 0.78rem; margin-top: 2px; }
+
 </style>
 </head>
 <body>
@@ -1006,6 +1025,171 @@ input{font-family:inherit;}
 
       </div>
 
+      <!-- SOCIAL MEDIA CONNECTIONS -->
+      <div class="section-row">
+        <div class="card glass" data-reveal>
+          <div class="card-head">
+            <div>
+              <h2>Social Media Connections</h2>
+              <div class="sub">Link your accounts and configure automated settings</div>
+            </div>
+          </div>
+          
+          <div class="conn-row">
+            <div class="conn-head">
+              <div class="conn-info">
+                <div class="conn-icon">IG</div>
+                <div>
+                  <div style="font-size:0.9rem; font-weight:600;">Instagram</div>
+                  <div style="font-size:0.8rem; color:var(--slate);">@creator_ig</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="ig-toggle" onchange="togglePlatform('ig')">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="conn-details" id="ig-details">
+              <div class="conn-option">
+                <div>
+                  <div>Auto Join Wave</div>
+                  <div class="opt-text">Automatically join recommended waves for Instagram.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="conn-option">
+                <div>
+                  <div>Smart F4F</div>
+                  <div class="opt-text">Automatically accept targeted follow-for-follow requests.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="conn-row">
+            <div class="conn-head">
+              <div class="conn-info">
+                <div class="conn-icon">TT</div>
+                <div>
+                  <div style="font-size:0.9rem; font-weight:600;">TikTok</div>
+                  <div style="font-size:0.8rem; color:var(--slate);">Not connected</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="tt-toggle" onchange="togglePlatform('tt')">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="conn-details" id="tt-details">
+              <div class="conn-option">
+                <div>
+                  <div>Auto Join Wave</div>
+                  <div class="opt-text">Automatically join recommended waves for TikTok.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="conn-option">
+                <div>
+                  <div>Smart F4F</div>
+                  <div class="opt-text">Automatically accept targeted follow-for-follow requests.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="conn-row">
+            <div class="conn-head">
+              <div class="conn-info">
+                <div class="conn-icon">X</div>
+                <div>
+                  <div style="font-size:0.9rem; font-weight:600;">X (Twitter)</div>
+                  <div style="font-size:0.8rem; color:var(--slate);">Not connected</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="x-toggle" onchange="togglePlatform('x')">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="conn-details" id="x-details">
+              <div class="conn-option">
+                <div>
+                  <div>Auto Join Wave</div>
+                  <div class="opt-text">Automatically join recommended waves for X.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="conn-option">
+                <div>
+                  <div>Smart F4F</div>
+                  <div class="opt-text">Automatically accept targeted follow-for-follow requests.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="conn-row">
+            <div class="conn-head">
+              <div class="conn-info">
+                <div class="conn-icon">YT</div>
+                <div>
+                  <div style="font-size:0.9rem; font-weight:600;">YouTube</div>
+                  <div style="font-size:0.8rem; color:var(--slate);">Not connected</div>
+                </div>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="yt-toggle" onchange="togglePlatform('yt')">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="conn-details" id="yt-details">
+              <div class="conn-option">
+                <div>
+                  <div>Auto Join Wave</div>
+                  <div class="opt-text">Automatically join recommended waves for YouTube.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="conn-option">
+                <div>
+                  <div>Smart F4F</div>
+                  <div class="opt-text">Automatically accept targeted follow-for-follow requests.</div>
+                </div>
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </main>
 </div>
@@ -1141,6 +1325,17 @@ input{font-family:inherit;}
 </div>
 
 <script>
+// ---- Toggle Platform Connections ----
+function togglePlatform(id) {
+  const details = document.getElementById(id + '-details');
+  const checkbox = document.getElementById(id + '-toggle');
+  if (checkbox.checked) {
+    details.classList.add('open');
+  } else {
+    details.classList.remove('open');
+  }
+}
+
 // ============ MODAL & CUSTOM SELECT ============
 function openModal() { document.getElementById('joinWaveModal').classList.add('open'); }
 function closeModal() { document.getElementById('joinWaveModal').classList.remove('open'); }
